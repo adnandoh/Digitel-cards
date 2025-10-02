@@ -1,0 +1,28 @@
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Palm Tree -->
+  <path d="M8 32C8 28 10 24 12 20C12.5 19 13 18 13.5 17C14 16 14.5 15 15 14C15.5 13 16 12 16.5 11C17 10 17.5 9 18 8C18.5 7 19 6 19.5 5C20 4 20.5 3 21 2C21.5 1 22 0 22.5 1C23 2 23.5 3 24 4C24.5 5 25 6 25.5 7C26 8 26.5 9 27 10C27.5 11 28 12 28.5 13C29 14 29.5 15 30 16C30.5 17 31 18 31.5 19C32 20 32.5 21 33 22C33.5 23 34 24 34.5 25C35 26 35.5 27 36 28C36.5 29 37 30 37.5 31C38 32 38.5 33 39 34C39.5 35 40 36 40.5 37C41 38 41.5 39 42 40C42.5 41 43 42 43.5 43C44 44 44.5 45 45 46" stroke="#DC2626" stroke-width="2" fill="none"/>
+  
+  <!-- House -->
+  <rect x="12" y="28" width="8" height="6" fill="#DC2626"/>
+  <polygon points="10,28 16,22 22,28" fill="#DC2626"/>
+  <rect x="13" y="30" width="2" height="2" fill="black"/>
+  <rect x="17" y="30" width="2" height="2" fill="black"/>
+  
+  <!-- Building -->
+  <rect x="20" y="24" width="8" height="10" fill="#DC2626"/>
+  <rect x="21" y="26" width="1.5" height="1.5" fill="black"/>
+  <rect x="23" y="26" width="1.5" height="1.5" fill="black"/>
+  <rect x="25" y="26" width="1.5" height="1.5" fill="black"/>
+  <rect x="21" y="28" width="1.5" height="1.5" fill="black"/>
+  <rect x="23" y="28" width="1.5" height="1.5" fill="black"/>
+  <rect x="25" y="28" width="1.5" height="1.5" fill="black"/>
+  <rect x="21" y="30" width="1.5" height="1.5" fill="black"/>
+  <rect x="23" y="30" width="1.5" height="1.5" fill="black"/>
+  <rect x="25" y="30" width="1.5" height="1.5" fill="black"/>
+  
+  <!-- Location Pin -->
+  <path d="M26 18C26 16.5 27.5 15 29 15C30.5 15 32 16.5 32 18C32 19.5 29 22 29 22C29 22 26 19.5 26 18Z" fill="#DC2626"/>
+  <circle cx="29" cy="18" r="1.5" fill="black"/>
+</svg>
+
+

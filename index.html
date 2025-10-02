@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VacationBNA Staff Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .directory-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .directory-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .directory-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #111111;
+            margin-bottom: 12px;
+        }
+        
+        .directory-subtitle {
+            font-size: 16px;
+            color: #757575;
+            margin-bottom: 20px;
+        }
+        
+        .company-logo {
+            width: 200px;
+            height: auto;
+            margin: 0 auto 40px;
+            display: block;
+        }
+        
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .staff-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .staff-card-link:hover {
+            transform: translateY(-4px);
+        }
+        
+        .staff-preview {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease;
+        }
+        
+        .staff-preview:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .staff-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 2px solid #111111;
+            margin-bottom: 16px;
+        }
+        
+        .staff-preview-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111111;
+            margin-bottom: 4px;
+        }
+        
+        .staff-preview-role {
+            font-size: 14px;
+            color: #757575;
+            margin-bottom: 8px;
+        }
+        
+        .staff-preview-phone {
+            font-size: 14px;
+            color: #2B6EF6;
+            font-weight: 500;
+        }
+        
+        .view-card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2B6EF6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 16px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .view-card-btn:hover {
+            background: #1E5AE8;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: background-color 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            color: #666;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .directory-title {
+                font-size: 24px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="directory-container">
+        <div class="directory-header">
+            <img src="Logo_Full.png" alt="VacationBNA Logo" class="company-logo">
+            <h1 class="directory-title">VacationBNA Staff Directory</h1>
+            <p class="directory-subtitle">Connect with our team members</p>
+        </div>
+        
+        <div class="staff-grid">
+            <!-- Adnan Shaikh -->
+            <div class="staff-card-link" onclick="openModal('adnan')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Adnan Shaikh" class="staff-avatar">
+                    <h3 class="staff-preview-name">Adnan Shaikh</h3>
+                    <p class="staff-preview-role">Product Design Lead</p>
+                    <p class="staff-preview-phone">+91 9372792693</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pranali -->
+            <div class="staff-card-link" onclick="openModal('pranali')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Pranali" class="staff-avatar">
+                    <h3 class="staff-preview-name">Pranali</h3>
+                    <p class="staff-preview-role">Customer Success Manager</p>
+                    <p class="staff-preview-phone">+91 8976318333</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shraddha -->
+            <div class="staff-card-link" onclick="openModal('shraddha')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Shraddha" class="staff-avatar">
+                    <h3 class="staff-preview-name">Shraddha</h3>
+                    <p class="staff-preview-role">Operations Manager</p>
+                    <p class="staff-preview-phone">+91 8976855935</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Muskan -->
+            <div class="staff-card-link" onclick="openModal('muskan')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Muskan" class="staff-avatar">
+                    <h3 class="staff-preview-name">Muskan</h3>
+                    <p class="staff-preview-role">Marketing Specialist</p>
+                    <p class="staff-preview-phone">+91 8976203444</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mr. Manzoor -->
+            <div class="staff-card-link" onclick="openModal('mrmanzoor')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Mr. Manzoor" class="staff-avatar">
+                    <h3 class="staff-preview-name">Mr. Manzoor</h3>
+                    <p class="staff-preview-role">Business Development Manager</p>
+                    <p class="staff-preview-phone">+91 9619777136</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arshad -->
+            <div class="staff-card-link" onclick="openModal('arshad')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Arshad" class="staff-avatar">
+                    <h3 class="staff-preview-name">Arshad</h3>
+                    <p class="staff-preview-role">Technical Support Specialist</p>
+                    <p class="staff-preview-phone">+91 8828936896</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Amreen -->
+            <div class="staff-card-link" onclick="openModal('amreen')">
+                <div class="staff-preview">
+                    <img src="assets/profile-icon.svg" alt="Amreen" class="staff-avatar">
+                    <h3 class="staff-preview-name">Amreen</h3>
+                    <p class="staff-preview-role">Client Relations Manager</p>
+                    <p class="staff-preview-phone">+91 8689977777</p>
+                    <div class="view-card-btn">
+                        View Digital Card
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Overlay -->
+    <div id="profileModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            <div id="modalProfileContent">
+                <!-- Profile content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Profile data for modal display
+        const profileData = {
+            adnan: {
+                name: "Adnan Shaikh",
+                role: "Product Design Lead",
+                phone: "+91 9372792693",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            pranali: {
+                name: "Pranali",
+                role: "Customer Success Manager",
+                phone: "+91 8976318333",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            shraddha: {
+                name: "Shraddha",
+                role: "Operations Manager",
+                phone: "+91 8976855935",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            muskan: {
+                name: "Muskan",
+                role: "Marketing Specialist",
+                phone: "+91 8976203444",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            mrmanzoor: {
+                name: "Mr. Manzoor",
+                role: "Business Development Manager",
+                phone: "+91 9619777136",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            arshad: {
+                name: "Arshad",
+                role: "Technical Support Specialist",
+                phone: "+91 8828936896",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            },
+            amreen: {
+                name: "Amreen",
+                role: "Client Relations Manager",
+                phone: "+91 8689977777",
+                email: "Info@vacationbna.com",
+                website: "VacationBNA.com"
+            }
+        };
+        
+        function openModal(profileKey) {
+            const profile = profileData[profileKey];
+            if (!profile) {
+                console.error('Profile not found:', profileKey);
+                return;
+            }
+            
+            const modalContent = document.getElementById('modalProfileContent');
+            if (!modalContent) {
+                console.error('Modal content element not found');
+                return;
+            }
+            
+            // Load the full profile card content
+            modalContent.innerHTML = `
+                <div class="container">
+                    <div class="staff-card" role="group" aria-label="Staff contact card">
+                        <!-- Top Panel -->
+                        <div class="top-panel">
+                            <!-- Avatar -->
+                            <div class="avatar-container">
+                                <img src="assets/profile-icon.svg" alt="User profile icon" class="avatar">
+                            </div>
+                            
+                            <!-- Brand Logo -->
+                            <div class="brand-logo">
+                                <img src="Logo_Full.png" alt="VacationBNA logo" class="logo-image">
+                            </div>
+                        </div>
+                        
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <!-- Staff Info -->
+                            <div class="staff-info">
+                                <h1 class="staff-name">${profile.name}</h1>
+                                <p class="staff-role">${profile.role}</p>
+                                <p class="staff-company">VacationBNA</p>
+                            </div>
+                            
+                            <!-- Bio -->
+                            <div class="bio">
+                                <p>We built VacationBNA to make hosting fair and simple. We're a member-supported platform that gives you total control, so you keep what you earn. There are no surprise cuts or middlemen—just clear tools, fair exposure, and a straightforward way to turn empty property into steady income.</p>
+                            </div>
+                            
+                            <!-- Divider -->
+                            <div class="divider"></div>
+                            
+                            <!-- Contact Rows -->
+                            <div class="contact-section">
+                                <a href="tel:${profile.phone}" class="contact-row" aria-label="Call ${profile.name}">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="contact-text">${profile.phone}</span>
+                                    <div class="contact-chevron">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                                
+                                <a href="mailto:${profile.email}" class="contact-row" aria-label="Email ${profile.name}">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="contact-text">${profile.email}</span>
+                                    <div class="contact-chevron">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://${profile.website}" class="contact-row" aria-label="Visit ${profile.name}'s website" target="_blank" rel="noopener noreferrer">
+                                    <div class="contact-icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <span class="contact-text">${profile.website}</span>
+                                    <div class="contact-chevron">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <!-- App Store Badges -->
+                            <div class="app-store-badges">
+                                <a href="https://apps.apple.com/in/app/vacationbna-provider/id6744270489" class="app-badge" aria-label="Download VacationBNA Host on the App Store" target="_blank" rel="noopener noreferrer">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Download_on_the_App_Store_RGB_blk.svg/640px-Download_on_the_App_Store_RGB_blk.svg.png" alt="Download VacationBNA Host on the App Store" class="badge-image">
+                                </a>
+                                <a href="https://play.google.com/store/apps/details?id=com.obeyjobs.vacationbna.host&pcampaignid=web_share" class="app-badge" aria-label="Get VacationBNA Host on Google Play" target="_blank" rel="noopener noreferrer">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png" alt="Get VacationBNA Host on Google Play" class="badge-image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+        
+        function closeModal(event) {
+            // Only close if clicking on overlay or close button
+            if (event && event.target !== event.currentTarget && !event.target.closest('.modal-close')) {
+                return;
+            }
+            
+            document.getElementById('profileModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

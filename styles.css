@@ -1,0 +1,333 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    /* padding: 20px; */
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+/* Staff Card */
+.staff-card {
+    width: 360px;
+    height: 600px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.staff-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .staff-card {
+        transition: none;
+    }
+    
+    .staff-card:hover {
+        transform: none;
+    }
+}
+
+/* Top Panel */
+.top-panel {
+    height: 120px;
+    background-color: #ECECEC;
+    position: relative;
+}
+
+/* Avatar */
+.avatar-container {
+    position: absolute;
+    left: 20px;
+    top: 24px;
+    z-index: 2;
+}
+
+.avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2px solid #111111;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+/* Brand Logo */
+.brand-logo {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 180px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Card Content */
+.card-content {
+    padding: 20px;
+    height: calc(100% - 120px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Staff Info */
+.staff-info {
+    margin-bottom: 16px;
+}
+
+.staff-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #111111;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.staff-role {
+    font-size: 14px;
+    font-weight: 500;
+    color: #757575;
+    margin-bottom: 2px;
+}
+
+.staff-company {
+    font-size: 13px;
+    font-weight: 400;
+    color: #BDBDBD;
+}
+
+/* Bio */
+.bio {
+    margin-bottom: 18px;
+}
+
+.bio p {
+    font-size: 13px;
+    font-weight: 400;
+    color: #616161;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background-color: #EEEEEE;
+    margin: 18px 0;
+}
+
+/* Contact Section */
+.contact-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-row {
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 16px;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #F2F2F2;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.contact-row:last-child {
+    border-bottom: none;
+}
+
+.contact-row:hover {
+    background-color: rgba(43, 110, 246, 0.05);
+}
+
+.contact-row:focus {
+    outline: 2px solid #2B6EF6;
+    outline-offset: -2px;
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    color: #2B6EF6;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    color: #111111;
+}
+
+.contact-chevron {
+    width: 16px;
+    height: 16px;
+    color: #2B6EF6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* App Store Badges */
+.app-store-badges {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-badge {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.app-badge:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.badge-image {
+    height: 40px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .staff-card {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    .staff-card {
+        width: 100%;
+        margin: 0 8px;
+    }
+    
+    .avatar {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .avatar-container {
+        left: 16px;
+        top: 20px;
+    }
+    
+    .card-content {
+        padding: 16px;
+    }
+    
+    .brand-logo {
+        top: 16px;
+        right: 16px;
+        width: 200px;
+        height: 63px;
+    }
+    
+    .badge-image {
+        height: 35px;
+    }
+    
+    .app-store-badges {
+        margin-top: 12px;
+        gap: 8px;
+        flex-direction: row;
+    }
+}
+
+/* High DPI Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .staff-card {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .staff-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    
+    .container {
+        min-height: auto;
+    }
+    
+    .staff-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .staff-card:hover {
+        transform: none;
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-contrast: high) {
+    .staff-card {
+        border: 2px solid #000;
+    }
+    
+    .divider {
+        background-color: #000;
+    }
+    
+    .contact-row {
+        border-bottom-color: #000;
+    }
+}
+
+/* Dark Mode Support - Disabled to maintain white theme */
+/* Removed dark mode styles to ensure card always appears white */
