@@ -1,6 +1,6 @@
 # VacationBNA Staff Digital Card
 
-A responsive, accessible digital business card component for VacationBNA staff members. Built with HTML, CSS, and following the provided JSON specification.
+A responsive, accessible digital business card component for VacationBNA staff members. build with HTML, CSS, and following the provided JSON specification.
 
 ## Features
 
